@@ -19,6 +19,10 @@ UOpenDoor::UOpenDoor()
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void UOpenDoor::OpenDoor()
+{
 
 	AActor *Owner = GetOwner();
 
@@ -33,6 +37,12 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	//poll every frame 
+	//if the actor that spawns overlap with trigger voulme
+	//if yes -> opendoor
+
+	if (PressurePlate && PressurePlate->IsOverlappingActor(ActorThatSpawns)) {
+		OpenDoor();
+	}
 }
 
